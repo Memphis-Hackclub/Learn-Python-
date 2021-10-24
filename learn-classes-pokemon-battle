@@ -1,0 +1,37 @@
+import random
+class Pokemon:
+  def __init__(self, name, move, moveDamage, healthPoints, element):
+    self.name = name
+    self.move = move
+    self.moveDamage = moveDamage
+    self.healthPoints = healthPoints
+    self.element = element
+  
+  def pmove(self, target):
+    success = random.randint(0,1)
+    if success == 1:
+      print(self.name+" used "+self.move+" on "+target.name+" inflicting "+str(self.moveDamage)+" damage \n")
+      target.healthPoints -= self.moveDamage
+      print(self.name+" : "+str(self.healthPoints)+"\n")
+      print(target.name+" : "+str(target.healthPoints)+"\n")
+    elif success == 0:
+      print(self.name+" "+self.move+" failed")
+      print(self.name+" : "+str(self.healthPoints)+"\n")
+      print(target.name+" : "+str(target.healthPoints)+"\n")
+
+
+
+pk = Pokemon("pikachu", "quick attack", 20, 60, "electic")
+cz = Pokemon("charizard", "blast", 130, 160, "fire")
+jp = Pokemon("jigglypuff", "rollout", 20, 70, "fairy")
+ev = Pokemon("eevee", "scratch", 10, 60, "normal")
+
+pokeList = ["pk", "cz", "jp","ev"]
+
+partner = input("Choose your Pokemon \n")
+targetAttack = input("Who do you want to attack? \n")
+
+while partner in pokeList and targetAttack in pokeList:
+
+  while locals()[targetAttack].healthPoints > 0:
+    locals()[partner].pmove(locals()[targetAttack])
